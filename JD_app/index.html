@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <title></title>
+    <!-- <link rel="shortcut icon" href="./static/favicon.ico" type="image/x-icon"> -->
+    <style>
+      .xs-plugin-pullup-undefined{
+        display: none;
+      }
+      .weui-panel__bd a{
+        background: #fcfcfc;
+        border-bottom: 1px solid #eee;
+      }
+      .weui-panel__ft a{
+        text-align: center;
+      }
+      img{
+        max-width: 100%;
+      }
+      li{
+        list-style: none;
+      }
+      html, body{
+        height:100%;
+        overflow:hidden;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      ::-webkit-scrollbar {
+        width: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="./static/mui.min.js"></script>
+    <script>
+      mui.init({
+        keyEventBind: {
+          backbutton: true    //  关闭back案件监听
+        }
+      })
+      var first = null;
+      mui.back = function(){
+        // 首次按键,提示一次退出应用
+        if(!first){
+          first = new Date().getTime();
+          mui.toast('再按一次退出应用！')
+          history.go(-1);
+          setTimeout(function(){
+            first = null;
+          }, 1000)
+        }else{
+          if(new Date().getTime() - first <= 1000){
+            plus.runtime.quit();
+          }
+        }
+      }
+    document.addEventListener( "plusready", onPlusReady, false );
+    // 扩展API加载完毕，现在可以正常调用扩展API
+    function onPlusReady() {
+        var e = document.getElementById("scan");
+    }
+    </script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
